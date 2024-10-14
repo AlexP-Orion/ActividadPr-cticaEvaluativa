@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Validate Markdown
+      run: |
+        # Instalar markdownlint
+        npm install -g markdownlint-cli
+        # Validar archivos Markdown
+        markdownlint README.md user_stories/*.md
+
+    - name: Check links
+      run: |
+        npx markdown-link-check README.md
